@@ -10,12 +10,14 @@ class TrendATRStrategy:
         atr_period=14,
         adx_period=14,
         adx_threshold=25,
+        min_atr_percent=0.0,
     ):
         self.fast_period = fast_period
         self.slow_period = slow_period
         self.atr_period = atr_period
         self.adx_period = adx_period
         self.adx_threshold = adx_threshold
+        self.min_atr_percent = min_atr_percent
 
     def calculate_atr(self, data):
 
@@ -158,6 +160,11 @@ class TrendATRStrategy:
             (data["close"] > data["fast_ema"])
             &
             (data["adx"] >= self.adx_threshold)
+            &
+            (
+                data["atr"] / data["close"]
+                >= self.min_atr_percent
+            )
         )
 
         data.loc[

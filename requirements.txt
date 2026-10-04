@@ -1,0 +1,6 @@
+pandas
+numpy
+matplotlib
+ta
+ccxt
+python-dotenv

@@ -23,11 +23,14 @@ def main():
     # LOAD DATA
     # ========================================
 
-    data_file = (
+    root = Path(__file__).resolve().parents[1]
+    data_file = Path(
         sys.argv[1]
         if len(sys.argv) > 1
-        else "data/splits/development.csv"
+        else root / "data" / "splits" / "development.csv"
     )
+    if not data_file.is_absolute():
+        data_file = root / data_file
 
     print()
     print(f"Loading market data: {data_file}")
@@ -53,7 +56,8 @@ def main():
     # LOG DIRECTORY
     # ========================================
 
-    Path("logs").mkdir(
+    logs_dir = root / "logs"
+    logs_dir.mkdir(
         parents=True,
         exist_ok=True,
     )
@@ -271,14 +275,12 @@ def main():
         trade_rows
     )
 
-    trade_dataframe.to_csv(
-        "logs/v22_trades.csv",
-        index=False,
-    )
+    diagnostics_file = logs_dir / "v22_trades.csv"
+    trade_dataframe.to_csv(diagnostics_file, index=False)
 
     print()
     print("Trade diagnostics saved to:")
-    print("logs/v22_trades.csv")
+    print(diagnostics_file)
 
     # ========================================
     # PERFORMANCE CALCULATIONS

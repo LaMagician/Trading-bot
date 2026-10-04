@@ -1,4 +1,6 @@
 import sys
+from pathlib import Path
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -426,10 +428,9 @@ def plot_equity_curve(engine):
     plt.grid(True)
     plt.tight_layout()
 
-    plt.savefig(
-        "logs/equity_curve.png",
-        dpi=150,
-    )
+    logs_dir = Path(__file__).resolve().parents[1] / "logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(logs_dir / "equity_curve.png", dpi=150)
 
     plt.show()
 
@@ -474,21 +475,23 @@ def plot_drawdown(engine):
     plt.grid(True)
     plt.tight_layout()
 
-    plt.savefig(
-        "logs/drawdown.png",
-        dpi=150,
-    )
+    logs_dir = Path(__file__).resolve().parents[1] / "logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(logs_dir / "drawdown.png", dpi=150)
 
     plt.show()
 
 
 def main():
 
-    data_file = (
+    root = Path(__file__).resolve().parents[1]
+    data_file = Path(
         sys.argv[1]
         if len(sys.argv) > 1
-        else "data/test_data.csv"
+        else root / "data" / "test_data.csv"
     )
+    if not data_file.is_absolute():
+        data_file = root / data_file
 
     print()
     print(f"Loading market data: {data_file}")
@@ -556,10 +559,6 @@ def main():
     plot_equity_curve(engine)
 
     plot_drawdown(engine)
-
-
-if __name__ == "__main__":
-    main()
 
 
 if __name__ == "__main__":
