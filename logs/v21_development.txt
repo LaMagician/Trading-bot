@@ -1,0 +1,40 @@
+
+Loading market data: data/splits/development.csv
+
+==================================================
+              V2 SUMMARY
+==================================================
+
+============================================================
+                 V2 DIAGNOSTICS
+============================================================
+
+--- ACCOUNT ---
+Starting capital:   10,000.00
+Ending capital:     7,767.97
+Net profit:         -2,232.03
+Return:             -22.32%
+
+--- TRADES ---
+Total trades:       84
+Winning trades:     16
+Losing trades:      68
+Win rate:           19.05%
+Average trade:      -26.57
+
+--- PROFITABILITY ---
+Gross profit:       346.89
+Gross loss:         1,654.41
+Total fees:         972.18
+Profit factor:      0.21
+
+--- EXIT REASONS ---
+SIGNAL_EXIT          77
+STOP_LOSS            7
+
+============================================================
+Starting capital: 10,000.00
+Ending capital:   7,767.97
+Net profit:       -2,232.03
+Total trades:     84
+==================================================
